@@ -1,0 +1,62 @@
+{
+  "name": "modal-plugin",
+  "version": "0.1.0",
+  "description": "modal plugin",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aycet/modal-plugin.git"
+  },
+  "author": "aycet",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "modal",
+    "plugin",
+    "component",
+    "library"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsup src/lib/index.tsx --dts --format esm,cjs --out-dir dist",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "test": "vitest",
+    "prepare": "husky install",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.30.1",
+    "@testing-library/react": "^14.2.2",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.6.0",
+    "eslint": "^9.30.1",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "tsup": "^8.0.1",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.35.1",
+    "vite": "^7.0.4",
+    "vitest": "^3.2.4"
+  }
+}
