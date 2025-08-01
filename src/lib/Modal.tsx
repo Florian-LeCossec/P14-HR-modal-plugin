@@ -1,5 +1,18 @@
 import React from 'react';
-import './Modal.css';
+import modalStyles from './Modal.css?inline';
+
+// Injection automatique des styles CSS
+const injectStyles = () => {
+  if (typeof document !== 'undefined') {
+    const styleId = 'flcossec-react-modal-styles';
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement('style');
+      style.id = styleId;
+      style.textContent = modalStyles;
+      document.head.appendChild(style);
+    }
+  }
+};
 
 type BaseModalProps = {
   open: boolean;
@@ -48,6 +61,11 @@ export const Modal: React.FC<ModalProps> = ({
   footerClassName,
   closeButtonClassName,
 }) => {
+  // Injecter les styles CSS au premier rendu
+  React.useEffect(() => {
+    injectStyles();
+  }, []);
+
   if (!open) return null;
 
   return (

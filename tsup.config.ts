@@ -12,4 +12,7 @@ export default defineConfig({
     options.jsx = 'automatic';
   },
   tsconfig: 'tsconfig.app.json',
+  loader: {
+    '.css': 'copy',
+  },
 });

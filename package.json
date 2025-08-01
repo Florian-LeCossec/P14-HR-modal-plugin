@@ -16,6 +16,7 @@
   "files": [
     "dist"
   ],
+  "style": "./dist/Modal-GOLB2L55.css",
   "repository": {
     "type": "git",
     "url": "https://github.com/aycet/modal-plugin.git"
