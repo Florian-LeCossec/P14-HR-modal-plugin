@@ -1,0 +1,39 @@
+# Fichiers de développement
+src/App.tsx
+src/App.css
+src/main.tsx
+src/index.css
+src/assets/
+index.html
+public/
+
+# Configuration et outils
+vite.config.ts
+vitest.config.ts
+src/test-setup.ts
+src/lib/Modal.test.tsx
+scripts/
+.eslintrc.*
+.prettierrc.*
+.husky/
+
+# Dépendances de développement
+node_modules/
+pnpm-lock.yaml
+
+# Fichiers de build temporaires
+dist/
+*.tsbuildinfo
+
+# IDE et OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log* 

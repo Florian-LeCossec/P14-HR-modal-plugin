@@ -24,11 +24,12 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsup src/lib/index.tsx --dts --format esm,cjs --out-dir dist",
+    "build": "tsup",
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "vitest",
-    "prepublishOnly": "npm run build && npm test",
+    "clean": "node scripts/clean-for-publish.js",
+    "prepublishOnly": "npm run clean && npm run build && npm test",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -43,6 +44,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
+    "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.2",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
@@ -52,6 +54,7 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
     "husky": "^9.0.11",
+    "jsdom": "^26.1.0",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "tsup": "^8.0.1",

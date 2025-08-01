@@ -5,6 +5,7 @@ type BaseModalProps = {
   open: boolean;
   onClose: () => void;
   blur?: boolean;
+  persistent?: boolean;
   width: number;
   footer?: React.ReactNode;
   body: React.ReactNode;
@@ -28,10 +29,13 @@ type ModalWithTitle = BaseModalProps & {
 
 type ModalProps = ModalWithHeader | ModalWithTitle;
 
+export type { ModalProps };
+
 export const Modal: React.FC<ModalProps> = ({
   open,
   onClose,
   blur = false,
+  persistent = false,
   title,
   width,
   header,
@@ -49,7 +53,7 @@ export const Modal: React.FC<ModalProps> = ({
   return (
     <div
       className={overlayClassName || `modal-overlay${blur ? ' modal-blur' : ''}`}
-      onClick={onClose}
+      onClick={persistent ? undefined : onClose}
       aria-modal="true"
       role="dialog"
     >
