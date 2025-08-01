@@ -4,12 +4,11 @@ import { copyFileSync, mkdirSync } from 'fs';
 export default defineConfig({
   entry: ['src/lib/index.tsx'],
   format: ['esm', 'cjs'],
-  dts: false, // Désactivé temporairement
+  dts: true,
   outDir: 'dist',
   clean: true,
-  jsx: 'react-jsx',
-  onSuccess: () => {
-    // Copier le fichier CSS
+  tsconfig: 'tsconfig.build.json',
+  onSuccess: async () => {
     try {
       mkdirSync('dist', { recursive: true });
       copyFileSync('src/lib/Modal.css', 'dist/Modal.css');
