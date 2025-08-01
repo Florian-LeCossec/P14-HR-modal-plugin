@@ -1,5 +1,5 @@
 {
-  "name": "modal-plugin",
+  "name": "@flcossec/react-modal",
   "version": "0.1.0",
   "description": "modal plugin",
   "type": "module",
