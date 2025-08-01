@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@flcossec/react-modal':
+        specifier: ^0.1.3
+        version: 0.1.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react:
         specifier: '>=18'
         version: 19.1.0
@@ -393,6 +396,12 @@ packages:
   '@eslint/plugin-kit@0.3.4':
     resolution: {integrity: sha512-Ul5l+lHEcw3L5+k8POx6r74mxEYKG5kOb6Xpy2gCRW6zweT6TEhAf8vhxGgjhqrd/VO/Dirhsb+1hNpD1ue9hw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@flcossec/react-modal@0.1.3':
+    resolution: {integrity: sha512-b9cNUFVTyJfe3f9Nx/E7E3Yg3du+f0rizhjdXqQq8gujfF2sZSQhi+uDpK1ceYNmQ+ImpLT1kcyvCTGhntFHfg==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -2388,6 +2397,11 @@ snapshots:
     dependencies:
       '@eslint/core': 0.15.1
       levn: 0.4.1
+
+  '@flcossec/react-modal@0.1.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+    dependencies:
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
 
   '@humanfs/core@0.19.1': {}
 
