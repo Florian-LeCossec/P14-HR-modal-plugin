@@ -5,18 +5,18 @@ A modern and accessible React modal with TypeScript support.
 ## Installation
 
 ```bash
-npm install modal-plugin
+npm install @flcossec/react-modal
 # or
-yarn add modal-plugin
+yarn add @flcossec/react-modal
 # or
-pnpm add modal-plugin
+pnpm add @flcossec/react-modal
 ```
 
 ## Usage
 
 ```tsx
-import { Modal } from 'modal-plugin';
-import 'modal-plugin/dist/Modal.css'; // CSS styles
+import { Modal } from '@flcossec/react-modal';
+import '@flcossec/react-modal/dist/Modal.css'; // CSS styles
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
