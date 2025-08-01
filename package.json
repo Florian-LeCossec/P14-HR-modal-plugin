@@ -2,6 +2,7 @@
   "name": "modal-plugin",
   "version": "0.1.0",
   "description": "modal plugin",
+  "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -27,8 +28,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "vitest",
-    "prepare": "husky install",
-    "prepublishOnly": "npm run build && npm test"
+    "prepublishOnly": "npm run build && npm test",
+    "prepare": "husky"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
