@@ -84,10 +84,10 @@ export const Modal: React.FC<ModalProps> = ({
         {header ? (
           <div className={headerClassName || 'modal-header-default'}>{header}</div>
         ) : title ? (
-          <div className={headerClassName || 'modal-header-default'}>
+          <div className={headerClassName || 'modal-header'}>
             <span>{title}</span>
             <div
-              className={closeButtonClassName || 'modal-close-default'}
+              className={closeButtonClassName || 'modal-close'}
               onClick={onClose}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
