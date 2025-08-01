@@ -16,7 +16,6 @@ pnpm add @flcossec/react-modal
 
 ```tsx
 import { Modal } from '@flcossec/react-modal';
-import '@flcossec/react-modal/dist/Modal.css'; // CSS styles
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);

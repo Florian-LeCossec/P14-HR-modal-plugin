@@ -70,24 +70,24 @@ export const Modal: React.FC<ModalProps> = ({
 
   return (
     <div
-      className={overlayClassName || `modal-overlay${blur ? ' modal-blur' : ''}`}
+      className={overlayClassName || `modal-overlay-default${blur ? ' modal-blur' : ''}`}
       onClick={persistent ? undefined : onClose}
       aria-modal="true"
       role="dialog"
     >
       <div
-        className={contentClassName || 'modal-content'}
+        className={contentClassName || 'modal-content-default'}
         style={width ? { width: typeof width === 'number' ? `${width}px` : width } : undefined}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         {header ? (
-          <div className={headerClassName || 'modal-header'}>{header}</div>
+          <div className={headerClassName || 'modal-header-default'}>{header}</div>
         ) : title ? (
-          <div className={headerClassName || 'modal-header'}>
+          <div className={headerClassName || 'modal-header-default'}>
             <span>{title}</span>
             <div
-              className={closeButtonClassName || 'modal-close'}
+              className={closeButtonClassName || 'modal-close-default'}
               onClick={onClose}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -105,10 +105,10 @@ export const Modal: React.FC<ModalProps> = ({
         ) : null}
 
         {/* Body */}
-        <div className={bodyClassName || 'modal-body'}>{body}</div>
+        <div className={bodyClassName || 'modal-body-default'}>{body}</div>
 
         {/* Footer */}
-        {footer && <div className={footerClassName || 'modal-footer'}>{footer}</div>}
+        {footer && <div className={footerClassName || 'modal-footer-default'}>{footer}</div>}
       </div>
     </div>
   );

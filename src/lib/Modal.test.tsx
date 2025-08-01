@@ -9,44 +9,44 @@ describe('Modal', () => {
     mockOnClose.mockClear();
   });
 
-  it('ne devrait pas rendre la modal quand open est false', () => {
+  it('should not render modal when open is false', () => {
     render(
       <Modal
         open={false}
         onClose={mockOnClose}
         title="Test Modal"
         width={400}
-        body={<div>Contenu de test</div>}
+        body={<div>Test content</div>}
       />,
     );
 
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 
-  it('devrait rendre la modal avec un titre quand open est true', () => {
+  it('should render modal with title when open is true', () => {
     render(
       <Modal
         open={true}
         onClose={mockOnClose}
         title="Test Modal"
         width={400}
-        body={<div>Contenu de test</div>}
+        body={<div>Test content</div>}
       />,
     );
 
     expect(screen.getByRole('dialog')).toBeInTheDocument();
     expect(screen.getByText('Test Modal')).toBeInTheDocument();
-    expect(screen.getByText('Contenu de test')).toBeInTheDocument();
+    expect(screen.getByText('Test content')).toBeInTheDocument();
   });
 
-  it("devrait appeler onClose quand on clique sur l'overlay", () => {
+  it('should call onClose when clicking on overlay', () => {
     render(
       <Modal
         open={true}
         onClose={mockOnClose}
         title="Test Modal"
         width={400}
-        body={<div>Contenu de test</div>}
+        body={<div>Test content</div>}
       />,
     );
 
@@ -56,7 +56,7 @@ describe('Modal', () => {
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
 
-  it("ne devrait pas appeler onClose quand on clique sur l'overlay si persistent est true", () => {
+  it('should not call onClose when clicking on overlay if persistent is true', () => {
     render(
       <Modal
         open={true}
@@ -64,7 +64,7 @@ describe('Modal', () => {
         persistent={true}
         title="Test Modal"
         width={400}
-        body={<div>Contenu de test</div>}
+        body={<div>Test content</div>}
       />,
     );
 
@@ -74,18 +74,18 @@ describe('Modal', () => {
     expect(mockOnClose).not.toHaveBeenCalled();
   });
 
-  it('ne devrait pas appeler onClose quand on clique sur le contenu de la modal', () => {
+  it('should not call onClose when clicking on modal content', () => {
     render(
       <Modal
         open={true}
         onClose={mockOnClose}
         title="Test Modal"
         width={400}
-        body={<div>Contenu de test</div>}
+        body={<div>Test content</div>}
       />,
     );
 
-    const content = screen.getByText('Contenu de test').closest('.modal-content');
+    const content = screen.getByText('Test content').closest('.modal-content-default');
     if (content) {
       fireEvent.click(content);
     }
@@ -93,14 +93,14 @@ describe('Modal', () => {
     expect(mockOnClose).not.toHaveBeenCalled();
   });
 
-  it('devrait appeler onClose quand on clique sur le bouton de fermeture', () => {
+  it('should call onClose when clicking on close button', () => {
     render(
       <Modal
         open={true}
         onClose={mockOnClose}
         title="Test Modal"
         width={400}
-        body={<div>Contenu de test</div>}
+        body={<div>Test content</div>}
       />,
     );
 
@@ -110,14 +110,14 @@ describe('Modal', () => {
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
 
-  it('devrait appeler onClose avec la touche Entrée sur le bouton de fermeture', () => {
+  it('should call onClose with Enter key on close button', () => {
     render(
       <Modal
         open={true}
         onClose={mockOnClose}
         title="Test Modal"
         width={400}
-        body={<div>Contenu de test</div>}
+        body={<div>Test content</div>}
       />,
     );
 
@@ -127,14 +127,14 @@ describe('Modal', () => {
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
 
-  it('devrait appeler onClose avec la touche Espace sur le bouton de fermeture', () => {
+  it('should call onClose with Space key on close button', () => {
     render(
       <Modal
         open={true}
         onClose={mockOnClose}
         title="Test Modal"
         width={400}
-        body={<div>Contenu de test</div>}
+        body={<div>Test content</div>}
       />,
     );
 
@@ -144,44 +144,44 @@ describe('Modal', () => {
     expect(mockOnClose).toHaveBeenCalledTimes(1);
   });
 
-  it('devrait appliquer la largeur spécifiée', () => {
+  it('should apply specified width', () => {
     render(
       <Modal
         open={true}
         onClose={mockOnClose}
         title="Test Modal"
         width={600}
-        body={<div>Contenu de test</div>}
+        body={<div>Test content</div>}
       />,
     );
 
-    const content = screen.getByText('Contenu de test').closest('.modal-content');
+    const content = screen.getByText('Test content').closest('.modal-content-default');
     expect(content).toHaveStyle({ width: '600px' });
   });
 
-  it('devrait rendre avec un header personnalisé', () => {
+  it('should render with custom header', () => {
     render(
       <Modal
         open={true}
         onClose={mockOnClose}
-        header={<div>Header personnalisé</div>}
+        header={<div>Custom header</div>}
         width={400}
-        body={<div>Contenu de test</div>}
+        body={<div>Test content</div>}
       />,
     );
 
-    expect(screen.getByText('Header personnalisé')).toBeInTheDocument();
+    expect(screen.getByText('Custom header')).toBeInTheDocument();
     expect(screen.queryByText('Test Modal')).not.toBeInTheDocument();
   });
 
-  it('devrait rendre avec un footer', () => {
+  it('should render with footer', () => {
     render(
       <Modal
         open={true}
         onClose={mockOnClose}
         title="Test Modal"
         width={400}
-        body={<div>Contenu de test</div>}
+        body={<div>Test content</div>}
         footer={<button>Action</button>}
       />,
     );
@@ -189,14 +189,14 @@ describe('Modal', () => {
     expect(screen.getByText('Action')).toBeInTheDocument();
   });
 
-  it('devrait appliquer la classe blur quand blur est true', () => {
+  it('should apply blur class when blur is true', () => {
     render(
       <Modal
         open={true}
         onClose={mockOnClose}
         title="Test Modal"
         width={400}
-        body={<div>Contenu de test</div>}
+        body={<div>Test content</div>}
         blur={true}
       />,
     );
@@ -205,14 +205,14 @@ describe('Modal', () => {
     expect(overlay).toHaveClass('modal-blur');
   });
 
-  it('devrait appliquer les classes CSS personnalisées', () => {
+  it('should apply custom CSS classes', () => {
     render(
       <Modal
         open={true}
         onClose={mockOnClose}
         title="Test Modal"
         width={400}
-        body={<div>Contenu de test</div>}
+        body={<div>Test content</div>}
         overlayClassName="custom-overlay"
         contentClassName="custom-content"
         headerClassName="custom-header"
@@ -224,9 +224,9 @@ describe('Modal', () => {
     );
 
     const overlay = screen.getByRole('dialog');
-    const content = screen.getByText('Contenu de test').closest('.custom-content');
+    const content = screen.getByText('Test content').closest('.custom-content');
     const header = screen.getByText('Test Modal').closest('.custom-header');
-    const body = screen.getByText('Contenu de test').closest('.custom-body');
+    const body = screen.getByText('Test content').closest('.custom-body');
     const footer = screen.getByText('Footer').closest('.custom-footer');
     const closeButton = screen.getByRole('button', { name: /close/i });
 
@@ -238,14 +238,14 @@ describe('Modal', () => {
     expect(closeButton).toHaveClass('custom-close');
   });
 
-  it("devrait avoir les attributs d'accessibilité appropriés", () => {
+  it('should have appropriate accessibility attributes', () => {
     render(
       <Modal
         open={true}
         onClose={mockOnClose}
         title="Test Modal"
         width={400}
-        body={<div>Contenu de test</div>}
+        body={<div>Test content</div>}
       />,
     );
 

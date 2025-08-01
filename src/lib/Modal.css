@@ -1,5 +1,5 @@
 /* Modal Overlay */
-.modal-overlay {
+.modal-overlay-default {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,12 +13,12 @@
   animation: fadeIn 0.3s ease-out;
 }
 
-.modal-overlay.modal-blur {
+.modal-overlay-default.modal-blur {
   backdrop-filter: blur(2px);
 }
 
 /* Modal Content */
-.modal-content {
+.modal-content-default {
   background: white;
   border-radius: 16px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -31,7 +31,7 @@
 }
 
 /* Modal Header */
-.modal-header {
+.modal-header-default {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -39,14 +39,14 @@
   border-bottom: 1px solid #f1f5f9;
 }
 
-.modal-header span {
+.modal-header-default span {
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0;
   line-height: 1.2;
 }
 
-.modal-close {
+.modal-close-default {
   background: none;
   border: none;
   font-size: 28px;
@@ -61,21 +61,21 @@
   transition: color 0.2s ease;
 }
 
-.modal-close:hover {
+.modal-close-default:hover {
   scale: 1.1;
 }
 
-.modal-close:active {
+.modal-close-default:active {
   scale: 0.9;
 }
 
 /* Modal Body */
-.modal-body {
+.modal-body-default {
   padding: 24px 32px;
 }
 
 /* Modal Footer */
-.modal-footer {
+.modal-footer-default {
   padding: 16px 32px 24px 32px;
   border-top: 1px solid #f1f5f9;
 }
@@ -103,25 +103,25 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .modal-content {
+  .modal-content-default {
     margin: 16px;
     max-width: calc(100vw - 32px);
     border-radius: 12px;
   }
   
-  .modal-header {
+  .modal-header-default {
     padding: 20px 24px 12px 24px;
   }
   
-  .modal-header span {
+  .modal-header-default span {
     font-size: 1.125rem;
   }
   
-  .modal-body {
+  .modal-body-default {
     padding: 20px 24px;
   }
   
-  .modal-footer {
+  .modal-footer-default {
     padding: 12px 24px 20px 24px;
     flex-direction: column;
   }
@@ -132,20 +132,20 @@
 }
 
 /* Scrollbar Styling */
-.modal-body::-webkit-scrollbar {
+.modal-body-default::-webkit-scrollbar {
   width: 6px;
 }
 
-.modal-body::-webkit-scrollbar-track {
+.modal-body-default::-webkit-scrollbar-track {
   background: #f1f5f9;
   border-radius: 3px;
 }
 
-.modal-body::-webkit-scrollbar-thumb {
+.modal-body-default::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 3px;
 }
 
-.modal-body::-webkit-scrollbar-thumb:hover {
+.modal-body-default::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
