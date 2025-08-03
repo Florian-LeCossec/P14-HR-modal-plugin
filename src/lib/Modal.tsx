@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import modalStyles from './Modal.css?inline';
 
-// Injection automatique des styles CSS
 const injectStyles = () => {
   if (typeof document !== 'undefined') {
     const styleId = 'flcossec-react-modal-styles';
@@ -19,15 +19,15 @@ type BaseModalProps = {
   onClose: () => void;
   blur?: boolean;
   persistent?: boolean;
-  width: number;
+  width?: number | string;
+  backgroundColor?: string;
+  textColor?: string;
   footer?: React.ReactNode;
   body: React.ReactNode;
-  overlayClassName?: string;
-  contentClassName?: string;
-  headerClassName?: string;
-  bodyClassName?: string;
-  footerClassName?: string;
-  closeButtonClassName?: string;
+  closeButton?: boolean;
+  className?: string; // Pour wrapper contenu modal
+  overlayClassName?: string; // Pour overlay
+  zIndex?: number;
 };
 
 type ModalWithHeader = BaseModalProps & {
@@ -44,72 +44,140 @@ type ModalProps = ModalWithHeader | ModalWithTitle;
 
 export type { ModalProps };
 
+const FOCUSABLE_SELECTORS =
+  'a[href], area[href], input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"]), [contenteditable]';
+
 export const Modal: React.FC<ModalProps> = ({
   open,
   onClose,
   blur = false,
   persistent = false,
   title,
-  width,
-  header,
+  width = '500px',
+  backgroundColor = '#fff',
+  textColor = '#000',
   footer,
   body,
+  closeButton = true,
+  className,
   overlayClassName,
-  contentClassName,
-  headerClassName,
-  bodyClassName,
-  footerClassName,
-  closeButtonClassName,
+  zIndex = 1000,
+  header,
 }) => {
-  // Injecter les styles CSS au premier rendu
-  React.useEffect(() => {
+  useEffect(() => {
     injectStyles();
   }, []);
 
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open || persistent) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        onClose();
+      }
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusableElements =
+          modalRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS);
+        if (focusableElements.length === 0) {
+          e.preventDefault();
+          return;
+        }
+        const firstEl = focusableElements[0];
+        const lastEl = focusableElements[focusableElements.length - 1];
+        const activeEl = document.activeElement;
+
+        if (e.shiftKey) {
+          if (activeEl === firstEl) {
+            lastEl.focus();
+            e.preventDefault();
+          }
+        } else {
+          if (activeEl === lastEl) {
+            firstEl.focus();
+            e.preventDefault();
+          }
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [open, onClose, persistent]);
+
+  useEffect(() => {
+    if (open && modalRef.current) {
+      const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS);
+      if (focusableElements.length > 0) {
+        focusableElements[0].focus();
+      } else {
+        modalRef.current.focus();
+      }
+    }
+  }, [open]);
+
   if (!open) return null;
 
-  return (
+  let modalRoot = document.getElementById('modal-root');
+  if (!modalRoot) {
+    modalRoot = document.createElement('div');
+    modalRoot.id = 'modal-root';
+    document.body.appendChild(modalRoot);
+  }
+
+  const overlayClasses = `modal-overlay-default${blur ? ' modal-blur' : ''}${overlayClassName ? ` ${overlayClassName}` : ''}`;
+
+  return createPortal(
     <div
-      className={overlayClassName || `modal-overlay-default${blur ? ' modal-blur' : ''}`}
+      className={overlayClasses}
+      style={{ zIndex }}
       onClick={persistent ? undefined : onClose}
       aria-modal="true"
       role="dialog"
+      aria-labelledby={title ? 'modal-title' : undefined}
+      aria-describedby="modal-body"
     >
       <div
-        className={contentClassName || 'modal-content-default'}
-        style={width ? { width: typeof width === 'number' ? `${width}px` : width } : undefined}
+        ref={modalRef}
+        className={`modal-content-default ${className || ''}`}
+        style={{
+          width: typeof width === 'number' ? `${width}px` : width,
+          backgroundColor,
+          color: textColor,
+        }}
         onClick={(e) => e.stopPropagation()}
+        tabIndex={-1}
       >
-        {/* Header */}
-        {header ? (
-          <div className={headerClassName || 'modal-header-default'}>{header}</div>
-        ) : title ? (
-          <div className={headerClassName || 'modal-header'}>
-            <span>{title}</span>
-            <div
-              className={closeButtonClassName || 'modal-close'}
-              onClick={onClose}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  onClose();
-                }
-              }}
-              role="button"
-              tabIndex={0}
-              aria-label="close"
-            >
-              ×
-            </div>
+        {(header || title) && (
+          <div className="modal-header">
+            {header ?? <span id="modal-title">{title}</span>}
+            {closeButton && (
+              <div
+                className="modal-close-default"
+                onClick={onClose}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onClose();
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label="Close modal"
+              >
+                ×
+              </div>
+            )}
           </div>
-        ) : null}
-
-        {/* Body */}
-        <div className={bodyClassName || 'modal-body-default'}>{body}</div>
-
-        {/* Footer */}
-        {footer && <div className={footerClassName || 'modal-footer-default'}>{footer}</div>}
+        )}
+        <div id="modal-body" className="modal-body-default">
+          {body}
+        </div>
+        {footer && <div className="modal-footer-default">{footer}</div>}
       </div>
-    </div>
+    </div>,
+    modalRoot,
   );
 };

@@ -9,6 +9,7 @@ const filesToRemove = [
   'src/App.css',
   'src/main.tsx',
   'src/index.css',
+  'src/CustomModal.css',
   'src/assets/react.svg',
   'index.html',
   'public/vite.svg',
@@ -17,15 +18,15 @@ const filesToRemove = [
 // Dossiers à supprimer s'ils sont vides
 const dirsToCheck = ['src/assets', 'public'];
 
-console.log('🧹 Nettoyage du projet pour la publication...');
+console.log('🧹 Cleaning project for publication...');
 
 // Supprimer les fichiers
 filesToRemove.forEach((file) => {
   if (fs.existsSync(file)) {
     fs.unlinkSync(file);
-    console.log(`✅ Supprimé: ${file}`);
+    console.log(`✅ Deleted: ${file}`);
   } else {
-    console.log(`⚠️  Fichier non trouvé: ${file}`);
+    console.log(`⚠️  File not found: ${file}`);
   }
 });
 
@@ -35,11 +36,11 @@ dirsToCheck.forEach((dir) => {
     const files = fs.readdirSync(dir);
     if (files.length === 0) {
       fs.rmdirSync(dir);
-      console.log(`✅ Dossier vide supprimé: ${dir}`);
+      console.log(`✅ Empty directory deleted: ${dir}`);
     } else {
-      console.log(`⚠️  Dossier non vide, conservé: ${dir}`);
+      console.log(`⚠️  Non-empty directory, kept: ${dir}`);
     }
   }
 });
 
-console.log('✨ Nettoyage terminé !');
+console.log('✨ Cleaning completed!');
