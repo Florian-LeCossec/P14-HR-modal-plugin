@@ -15,4 +15,6 @@ export default defineConfig({
   loader: {
     '.css': 'copy',
   },
+  outDir: 'dist',
+  onSuccess: 'node scripts/rename-css.js',
 });
