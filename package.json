@@ -19,9 +19,9 @@
   "style": "./dist/Modal-A2RX3CKH.css",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aycet/modal-plugin.git"
+    "url": "https://github.com/Florian-LeCossec/P14-HR-modal-plugin"
   },
-  "author": "aycet",
+  "author": "Florian-LeCossec",
   "license": "MIT",
   "keywords": [
     "react",

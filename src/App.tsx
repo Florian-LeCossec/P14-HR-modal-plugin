@@ -244,31 +244,6 @@ export const App: React.FC = () => {
             backgroundColor: '#f8f9fa',
           }}
         >
-          <h3>Modal Colorée Animée</h3>
-          <p>Modal avec gradient animé et overlay personnalisé</p>
-          <button
-            onClick={() => openModal('colorful')}
-            style={{
-              padding: '10px 20px',
-              backgroundColor: '#ff6b6b',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-            }}
-          >
-            Ouvrir Modal
-          </button>
-        </div>
-
-        <div
-          style={{
-            border: '1px solid #ccc',
-            padding: '20px',
-            borderRadius: '8px',
-            backgroundColor: '#f8f9fa',
-          }}
-        >
           <h3>Modal Effet Verre</h3>
           <p>Modal avec effet de verre et overlay flou</p>
           <button
@@ -301,56 +276,6 @@ export const App: React.FC = () => {
             style={{
               padding: '10px 20px',
               backgroundColor: '#28a745',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-            }}
-          >
-            Ouvrir Modal
-          </button>
-        </div>
-
-        <div
-          style={{
-            border: '1px solid #ccc',
-            padding: '20px',
-            borderRadius: '8px',
-            backgroundColor: '#f8f9fa',
-          }}
-        >
-          <h3>Modal Overlay Animé</h3>
-          <p>Modal avec overlay animé et gradient</p>
-          <button
-            onClick={() => openModal('animatedOverlay')}
-            style={{
-              padding: '10px 20px',
-              backgroundColor: '#dc3545',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-            }}
-          >
-            Ouvrir Modal
-          </button>
-        </div>
-
-        <div
-          style={{
-            border: '1px solid #ccc',
-            padding: '20px',
-            borderRadius: '8px',
-            backgroundColor: '#f8f9fa',
-          }}
-        >
-          <h3>Modal Overlay Motif</h3>
-          <p>Modal avec overlay à motif de points</p>
-          <button
-            onClick={() => openModal('patternOverlay')}
-            style={{
-              padding: '10px 20px',
-              backgroundColor: '#fd7e14',
               color: 'white',
               border: 'none',
               borderRadius: '4px',
@@ -608,24 +533,6 @@ export const App: React.FC = () => {
         }
       />
 
-      {/* Modal Colorée Animée */}
-      <Modal
-        open={modals.colorful}
-        onClose={() => closeModal('colorful')}
-        className="colorful-modal-content"
-        overlayClassName="blur-overlay"
-        title="Modal Colorée Animée"
-        body={
-          <div>
-            <p>Cette modal a un gradient animé avec plusieurs couleurs !</p>
-            <p>L'overlay utilise un effet de flou personnalisé.</p>
-            <div style={{ textAlign: 'center', marginTop: '20px' }}>
-              <span style={{ fontSize: '48px' }}>🌈</span>
-            </div>
-          </div>
-        }
-      />
-
       {/* Modal Effet Verre */}
       <Modal
         open={modals.glassEffect}
@@ -663,40 +570,6 @@ export const App: React.FC = () => {
             <p>Elle utilise une ombre portée personnalisée.</p>
             <div style={{ textAlign: 'center', marginTop: '20px' }}>
               <span style={{ fontSize: '36px' }}>🔵</span>
-            </div>
-          </div>
-        }
-      />
-
-      {/* Modal Overlay Animé */}
-      <Modal
-        open={modals.animatedOverlay}
-        onClose={() => closeModal('animatedOverlay')}
-        overlayClassName="custom-overlay"
-        title="Modal avec Overlay Animé"
-        body={
-          <div>
-            <p>Cette modal a un overlay avec un gradient animé qui pulse.</p>
-            <p>L'animation change l'opacité du gradient rouge et bleu.</p>
-            <div style={{ textAlign: 'center', marginTop: '20px' }}>
-              <span style={{ fontSize: '36px' }}>✨</span>
-            </div>
-          </div>
-        }
-      />
-
-      {/* Modal Overlay Motif */}
-      <Modal
-        open={modals.patternOverlay}
-        onClose={() => closeModal('patternOverlay')}
-        overlayClassName="pattern-overlay"
-        title="Modal avec Overlay à Motif"
-        body={
-          <div>
-            <p>Cette modal a un overlay avec un motif de points.</p>
-            <p>Le motif est créé avec des gradients radiaux.</p>
-            <div style={{ textAlign: 'center', marginTop: '20px' }}>
-              <span style={{ fontSize: '36px' }}>🔘</span>
             </div>
           </div>
         }
